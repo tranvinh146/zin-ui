@@ -1,15 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import {
-  Menu,
-  Button,
-  Dropdown,
-  Container,
-  Icon,
-  Image,
-  Label,
-} from 'semantic-ui-react'
+import { Menu, Button, Dropdown, Container, Image } from 'semantic-ui-react'
 
 import { useSubstrate, useSubstrateState } from './substrate-lib'
 
@@ -101,40 +93,40 @@ function Main(props) {
             }}
             value={acctAddr(currentAccount)}
           />
-          <BalanceAnnotation />
+          {/* <BalanceAnnotation /> */}
         </Menu.Menu>
       </Container>
     </Menu>
   )
 }
 
-function BalanceAnnotation(props) {
-  const { api, currentAccount } = useSubstrateState()
-  const [accountBalance, setAccountBalance] = useState(0)
+// function BalanceAnnotation(props) {
+//   const { api, currentAccount } = useSubstrateState()
+//   const [accountBalance, setAccountBalance] = useState(0)
 
-  // When account address changes, update subscriptions
-  useEffect(() => {
-    let unsubscribe
+//   // When account address changes, update subscriptions
+//   useEffect(() => {
+//     let unsubscribe
 
-    // If the user has selected an address, create a new subscription
-    currentAccount &&
-      api.query.system
-        .account(acctAddr(currentAccount), balance =>
-          setAccountBalance(balance.data.free.toHuman())
-        )
-        .then(unsub => (unsubscribe = unsub))
-        .catch(console.error)
+//     // If the user has selected an address, create a new subscription
+//     currentAccount &&
+//       api.query.system
+//         .account(acctAddr(currentAccount), balance =>
+//           setAccountBalance(balance.data.free.toHuman())
+//         )
+//         .then(unsub => (unsubscribe = unsub))
+//         .catch(console.error)
 
-    return () => unsubscribe && unsubscribe()
-  }, [api, currentAccount])
+//     return () => unsubscribe && unsubscribe()
+//   }, [api, currentAccount])
 
-  return currentAccount ? (
-    <Label pointing="left">
-      <Icon name="money" color="green" />
-      {accountBalance}
-    </Label>
-  ) : null
-}
+//   return currentAccount ? (
+//     <Label pointing="left">
+//       <Icon name="money" color="green" />
+//       {accountBalance}
+//     </Label>
+//   ) : null
+// }
 
 export default function AccountSelector(props) {
   const { api, keyring } = useSubstrateState()
