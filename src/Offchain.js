@@ -59,7 +59,7 @@ export default function Main(props) {
           color="blue"
           onClick={generateCommitment}
         >
-          Deposit
+          Create Commitment
         </Button>
         <Container>
           {secret && (
@@ -82,7 +82,7 @@ export default function Main(props) {
           color="red"
           onClick={createProof}
         >
-          Withdraw
+          Create Proof
         </Button>
         <Input
           fluid
