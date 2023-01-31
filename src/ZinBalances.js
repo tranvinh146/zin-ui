@@ -7,12 +7,17 @@ export default function Main(props) {
   const { api, keyring } = useSubstrateState()
   const accounts = keyring.getPairs()
   const [balances, setBalances] = useState({})
+  const [totalTokens, setTotalTokens] = useState()
 
   useEffect(() => {
     const addresses = keyring.getPairs().map(account => account.address)
     let unsubscribeAll = null
 
-    api.query.privatePool.balanceOf
+    api.query.privateTransaction.totalTokens(tokens => {
+      setTotalTokens(tokens.toNumber())
+    })
+
+    api.query.privateTransaction.balanceOf
       .multi(addresses, balances => {
         const balancesMap = addresses.reduce(
           (acc, address, index) => ({
@@ -34,7 +39,7 @@ export default function Main(props) {
 
   return (
     <Grid.Column>
-      <h1>ZIN Balances</h1>
+      <h1>Tokens in Pool: {totalTokens} ZIN</h1>
       {accounts.length === 0 ? (
         <Label basic color="yellow">
           No accounts to be shown
