@@ -65,7 +65,7 @@ export default function Main(props) {
           {secret && (
             <div style={{ wordWrap: 'break-word' }}>
               <h3>Secret</h3>
-              {secret.toUpperCase()}
+              {secret}
             </div>
           )}
           {commitment && (
